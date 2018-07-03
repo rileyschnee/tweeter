@@ -90,7 +90,8 @@
     [self fetchTweets];
     [self.tableView reloadData];
 }
-/*- (IBAction)didTapLogout:(id)sender {
+
+- (IBAction)didTapLogout:(id)sender {
     AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
     
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
@@ -98,7 +99,7 @@
     appDelegate.window.rootViewController = loginViewController;
     
     [[APIManager shared] logout];
-}*/
+}
 
 
 
