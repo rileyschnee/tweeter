@@ -20,6 +20,7 @@
 		BE7B56C920EAC0E0006B5559 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7B56C820EAC0E0006B5559 /* User.m */; };
 		BE7B56CC20EAC1D4006B5559 /* Tweet.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7B56CB20EAC1D4006B5559 /* Tweet.m */; };
 		BE7B56CF20EAC9FC006B5559 /* TweetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7B56CE20EAC9FC006B5559 /* TweetCell.m */; };
+		BE93F71F20EECBB300165873 /* TweetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE93F71E20EECBB300165873 /* TweetViewController.m */; };
 		BEC2163E20EBDE2500E27F4C /* ComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEC2163D20EBDE2500E27F4C /* ComposeViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -49,6 +50,8 @@
 		BE7B56CB20EAC1D4006B5559 /* Tweet.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Tweet.m; sourceTree = "<group>"; };
 		BE7B56CD20EAC9FC006B5559 /* TweetCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TweetCell.h; sourceTree = "<group>"; };
 		BE7B56CE20EAC9FC006B5559 /* TweetCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TweetCell.m; sourceTree = "<group>"; };
+		BE93F71D20EECBB300165873 /* TweetViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TweetViewController.h; sourceTree = "<group>"; };
+		BE93F71E20EECBB300165873 /* TweetViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TweetViewController.m; sourceTree = "<group>"; };
 		BEC2163C20EBDE2500E27F4C /* ComposeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ComposeViewController.h; sourceTree = "<group>"; };
 		BEC2163D20EBDE2500E27F4C /* ComposeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ComposeViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -149,6 +152,8 @@
 				6AD2790820BCC04D0085BC29 /* TimelineViewController.m */,
 				BEC2163C20EBDE2500E27F4C /* ComposeViewController.h */,
 				BEC2163D20EBDE2500E27F4C /* ComposeViewController.m */,
+				BE93F71D20EECBB300165873 /* TweetViewController.h */,
+				BE93F71E20EECBB300165873 /* TweetViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -173,6 +178,7 @@
 				6AD278D120BC4B950085BC29 /* Sources */,
 				6AD278D220BC4B950085BC29 /* Frameworks */,
 				6AD278D320BC4B950085BC29 /* Resources */,
+				9295ADE65F7ABF602B139221 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -247,6 +253,24 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		9295ADE65F7ABF602B139221 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-twitter/Pods-twitter-resources.sh",
+				"${PODS_ROOT}/DateTools/DateTools/DateTools/DateTools.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/DateTools.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-twitter/Pods-twitter-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -259,6 +283,7 @@
 				BE7B56C920EAC0E0006B5559 /* User.m in Sources */,
 				BEC2163E20EBDE2500E27F4C /* ComposeViewController.m in Sources */,
 				6AD278E820BC4B970085BC29 /* main.m in Sources */,
+				BE93F71F20EECBB300165873 /* TweetViewController.m in Sources */,
 				BE7B56CC20EAC1D4006B5559 /* Tweet.m in Sources */,
 				6AD2790620BCC0380085BC29 /* LoginViewController.m in Sources */,
 				6AD278DA20BC4B950085BC29 /* AppDelegate.m in Sources */,

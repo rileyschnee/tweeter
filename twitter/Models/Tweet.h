@@ -15,9 +15,9 @@
 @property (nonatomic, strong) NSString *text;             // Tweet contents
 @property (nonatomic, strong) User *user;                 // Name and screen name of poster
 @property (nonatomic, strong) NSString *createdAtString;  // Display date
-@property (nonatomic) BOOL *favorited;
+@property (nonatomic) BOOL favorited;
 @property (nonatomic) int favoriteCount;
-@property (nonatomic) BOOL *retweeted;
+@property (nonatomic) BOOL retweeted;
 @property (nonatomic) int retweetCount;
 @property (nonatomic, strong) User *retweetedByUser;
 

@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Tweet.h"
+#import "TweetCell.h"
 
 @protocol ComposeViewControllerDelegate
 
@@ -17,5 +17,7 @@
 
 @interface ComposeViewController : UIViewController
 @property (nonatomic, weak) id<ComposeViewControllerDelegate> delegate;
+@property (nonatomic, strong) TweetCell *replyTo;
+@property (nonatomic) BOOL isAReply;
 
 @end

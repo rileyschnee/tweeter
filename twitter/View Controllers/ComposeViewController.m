@@ -12,6 +12,7 @@
 
 @interface ComposeViewController ()
 @property (weak, nonatomic) IBOutlet UITextView *tweetContent;
+@property (weak, nonatomic) IBOutlet UILabel *wordCount;
 
 @end
 
@@ -19,6 +20,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.tweetContent.delegate = self;
+    
+    if(self.isAReply){
+        self.tweetContent.text = [NSString stringWithFormat:@"@%@", self.replyTo.screenName.text];
+    }
+
     // Do any additional setup after loading the view.
 }
 
@@ -38,6 +45,23 @@
         }
     }];
     [self dismissModalViewControllerAnimated:YES];
+}
+- (IBAction)didTapCancel:(id)sender {
+    [self dismissModalViewControllerAnimated:YES];
+    
+}
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
+    // Set the max character limit
+    int characterLimit = 140;
+    
+    // Construct what the new text would be if we allowed the user's latest edit
+    NSString *newText = [self.tweetContent.text stringByReplacingCharactersInRange:range withString:text];
+    
+    // TODO: Update Character Count Label
+    self.wordCount.text = [NSString stringWithFormat:@"%lu / %i", self.tweetContent.text.length, characterLimit];
+    
+    // The new text should be allowed? True/False
+    return newText.length < characterLimit;
 }
 
 

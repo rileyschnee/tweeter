@@ -12,11 +12,13 @@
 #import "ComposeViewController.h"
 #import "AppDelegate.h"
 #import "LoginViewController.h"
+#import "Tweet.h"
 
-@interface TimelineViewController () <ComposeViewControllerDelegate, UITableViewDataSource, UITableViewDelegate>
+@interface TimelineViewController () <ComposeViewControllerDelegate, UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *timelineTweets;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
+@property (assign, nonatomic) BOOL isMoreDataLoading;
 
 @end
 
@@ -45,8 +47,10 @@
              NSString *text = dictionary[@"text"];
              NSLog(@"%@", text);
              }*/
+            self.isMoreDataLoading = false;
+
             self.timelineTweets = tweets;
-            
+
             [self.tableView reloadData];
             [self.refreshControl endRefreshing];
             
@@ -72,6 +76,10 @@
     UINavigationController *navigationController = [segue destinationViewController];
     ComposeViewController *composeController = (ComposeViewController*)navigationController.topViewController;
     composeController.delegate = self;
+    composeController.replyTo = sender;
+    if([composeController.replyTo isKindOfClass:[TweetCell class]]){
+        composeController.isAReply = true;
+    }
 }
 
 
@@ -99,6 +107,24 @@
     appDelegate.window.rootViewController = loginViewController;
     
     [[APIManager shared] logout];
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    // Handle scroll behavior here
+    if(!self.isMoreDataLoading){
+        // Calculate the position of one screen length before the bottom of the results
+        int scrollViewContentHeight = self.tableView.contentSize.height;
+        int scrollOffsetThreshold = scrollViewContentHeight - self.tableView.bounds.size.height;
+        
+        // When the user has scrolled past the threshold, start requesting
+        if(scrollView.contentOffset.y > scrollOffsetThreshold && self.tableView.isDragging) {
+            self.isMoreDataLoading = true;
+            [self fetchTweets];
+            [self.tableView reloadData];
+
+            // ... Code to load more results ...
+        }
+    }
 }
 
 
