@@ -1,4 +1,4 @@
-module Pods_twitter {
+framework module Pods_twitter {
   umbrella header "Pods-twitter-umbrella.h"
 
   export *

@@ -77,13 +77,17 @@
     // Pass the selected object to the new view controller.
     
     
-    if(sender == self.composeButton){
+    if([sender isKindOfClass:[UIButton class]] || [sender isKindOfClass:[UIBarButtonItem class]]){
         UINavigationController *navigationController = [segue destinationViewController];
         ComposeViewController *composeController = (ComposeViewController*)navigationController.topViewController;
         composeController.delegate = self;
-        composeController.replyTo = sender;
-        if([composeController.replyTo isKindOfClass:[TweetCell class]]){
+        
+        if([sender isKindOfClass:[UIButton class]]){
+            UITableViewCell *tappedCell = sender;
+            NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
+            Tweet *tweet = self.timelineTweets[indexPath.row];
             composeController.isAReply = true;
+            composeController.replyTo = tweet;
         }
     } else if([sender isKindOfClass:[TweetCell class]]){
         UITableViewCell *tappedCell = sender;
@@ -92,6 +96,13 @@
     
         TweetViewController *tweetViewController = [segue destinationViewController];
         tweetViewController.tweet = tweet;
+    } else if ([sender isKindOfClass:[User class]]){
+        //TweetCell *tappedCell = sender;
+        //NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
+        //Tweet *tweet = self.timelineTweets[indexPath.row];
+        
+        UserViewController *userViewController = [segue destinationViewController];
+        userViewController.userProf = (User *)sender;
     }
     
     //UserViewController *userController = [segue destinationViewController];
@@ -102,6 +113,7 @@
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     TweetCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TweetCell" forIndexPath:indexPath];
+    cell.delegate = self;
     cell.tweet = self.timelineTweets[indexPath.row];
     return cell;
 }
@@ -147,6 +159,13 @@
     [self fetchTweets];
     [self.tableView reloadData];
 }
+
+- (void)tweetCell:(TweetCell *)tweetCell didTap:(User *)user{
+    // TODO: Perform segue to profile view controller
+    [self performSegueWithIdentifier:@"profileSegue" sender:user];
+}
+
+
 
 
 

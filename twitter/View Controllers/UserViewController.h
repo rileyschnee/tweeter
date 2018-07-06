@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "User.h"
+
 @interface UserViewController : UIViewController
+
 @property (strong, nonatomic) User *userProf;
+
 @end

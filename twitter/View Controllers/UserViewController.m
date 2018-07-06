@@ -7,8 +7,15 @@
 //
 
 #import "UserViewController.h"
+#import "UIImageView+AFNetworking.h"
+#import "APIManager.h"
 
 @interface UserViewController ()
+@property (weak, nonatomic) IBOutlet UIImageView *profilePicView;
+@property (weak, nonatomic) IBOutlet UIImageView *headerView;
+@property (weak, nonatomic) IBOutlet UILabel *screenNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *bioLabel;
 
 @end
 
@@ -17,6 +24,32 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.nameLabel.text = self.userProf.name;
+    self.screenNameLabel.text = [NSString stringWithFormat:@"@%@", self.userProf.screenName];
+    [self.profilePicView setImageWithURL:self.userProf.profilePicURL];
+    self.profilePicView.layer.cornerRadius = 15;
+    self.profilePicView.layer.borderWidth = 1.0;
+    self.profilePicView.layer.borderColor = [UIColor whiteColor].CGColor;
+    [self.headerView setImageWithURL:self.userProf.headerPicURL];
+    self.bioLabel.text = self.userProf.bio;
+    [[APIManager shared] getUserTweets:(NSArray *user) withUser:(User *user) ^(NSArray *tweets, NSError *error) {
+        if (tweets) {
+            NSLog(@"😎😎😎 Successfully loaded home timeline");
+            /*for (NSDictionary *dictionary in tweets) {
+             NSString *text = dictionary[@"text"];
+             NSLog(@"%@", text);
+             }*/
+            self.isMoreDataLoading = false;
+            
+            self.timelineTweets = tweets;
+            
+            [self.tableView reloadData];
+            [self.refreshControl endRefreshing];
+            
+        } else {
+            NSLog(@"😫😫😫 Error getting home timeline: %@", error.localizedDescription);
+        }
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -19,6 +19,6 @@
 - (void)unfavorite:(Tweet *)tweet completion:(void (^)(Tweet *, NSError *))completion;
 - (void)retweet:(Tweet *)tweet completion:(void (^)(Tweet *, NSError *))completion;
 - (void)unretweet:(Tweet *)tweet completion:(void (^)(Tweet *, NSError *))completion;
-
+- (void)getUserTweets:(NSArray *)tweets withUser:(User *)user completion:(void (^)(NSArray *tweets, NSError *))completion;
 
 @end

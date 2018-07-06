@@ -8,6 +8,7 @@
 
 #import "APIManager.h"
 #import "Tweet.h"
+#import "User.h"
 
 static NSString * const baseURLString = @"https://api.twitter.com";
 static NSString * const consumerKey = @"BrmXFeq9aOEM2gHVO2JesM9yL"; // Enter your consumer key here
@@ -124,6 +125,21 @@ static NSString * const consumerSecret = @"fKPAVaZvb0oixWAMDy9aZ6cR03meQC8uFJeRO
     [self POST:urlString parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *  _Nullable tweetDictionary) {
         Tweet *tweet = [[Tweet alloc]initWithDictionary:tweetDictionary];
         completion(tweet, nil);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        completion(nil, error);
+    }];
+}
+
+- (void)getUserTweets:(NSArray *)tweets withUser:(User *)user completion:(void (^)(NSArray *tweets, NSError *))completion{
+
+    NSString *urlString = [NSString stringWithFormat:@"1.1/statuses/user_timeline.json"];
+    NSDictionary *parameters = @{@"id": user.idStr};
+    [self POST:urlString parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *  _Nullable tweetDictionaries) {
+        // Success
+        NSMutableArray *tweets  = [Tweet tweetsWithArray:tweetDictionaries];
+        completion(tweets, nil);
+        
+        completion(tweets, nil);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         completion(nil, error);
     }];

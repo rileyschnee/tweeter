@@ -18,6 +18,9 @@
         self.screenName = dictionary[@"screen_name"];
         self.profilePicURLString = dictionary[@"profile_image_url_https"];
         self.profilePicURL = [NSURL URLWithString:self.profilePicURLString];
+        self.headerPicURL = [NSURL URLWithString:dictionary[@"profile_banner_url"]];
+        self.bio = dictionary[@"bio"];
+        self.idStr = dictionary[@"user_id"];
     }
     return self;
 }

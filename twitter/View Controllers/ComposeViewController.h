@@ -17,7 +17,7 @@
 
 @interface ComposeViewController : UIViewController
 @property (nonatomic, weak) id<ComposeViewControllerDelegate> delegate;
-@property (nonatomic, strong) TweetCell *replyTo;
+@property (nonatomic, strong) Tweet *replyTo;
 @property (nonatomic) BOOL isAReply;
 
 @end

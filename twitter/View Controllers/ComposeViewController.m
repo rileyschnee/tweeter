@@ -23,7 +23,7 @@
     self.tweetContent.delegate = self;
     
     if(self.isAReply){
-        self.tweetContent.text = [NSString stringWithFormat:@"@%@", self.replyTo.screenName.text];
+        self.tweetContent.text = [NSString stringWithFormat:@"@%@ ", self.replyTo.user.screenName];
     }
 
     // Do any additional setup after loading the view.

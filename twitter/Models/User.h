@@ -14,6 +14,9 @@
 @property (strong, nonatomic) NSString *screenName;
 @property (strong, nonatomic) NSString *profilePicURLString;
 @property (strong, nonatomic) NSURL *profilePicURL;
+@property (strong, nonatomic) NSURL *headerPicURL;
+@property (strong, nonatomic) NSString *bio;
+@property (strong, nonatomic) NSString *idStr;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 

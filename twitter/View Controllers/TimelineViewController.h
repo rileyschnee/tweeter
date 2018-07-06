@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "Tweet.h"
+#import "TweetCell.h"
 
-@interface TimelineViewController : UIViewController
+@interface TimelineViewController : UIViewController <TweetCellDelegate>
 
 @end
