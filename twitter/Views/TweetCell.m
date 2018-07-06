@@ -40,6 +40,7 @@
     if (self.tweet.user.profilePicURL != nil) {
         [self.profileImage setImageWithURL:self.tweet.user.profilePicURL];
     }
+    self.profileImage.layer.cornerRadius = self.profileImage.frame.size.width /2;
     self.retweetButton.highlighted = self.tweet.retweeted;
     self.favoriteButton.highlighted = self.tweet.favorited;
 
@@ -120,8 +121,8 @@
     self.profileImage.alpha = 1.0;
     if (self.tweet.user.profilePicURL != nil) {
         [self.profileImage setImageWithURL:self.tweet.user.profilePicURL];
-
     }
+    self.profileImage.layer.cornerRadius = self.profileImage.frame.size.width /2;
 }
 
 

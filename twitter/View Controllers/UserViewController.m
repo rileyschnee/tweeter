@@ -9,14 +9,18 @@
 #import "UserViewController.h"
 #import "UIImageView+AFNetworking.h"
 #import "APIManager.h"
+#import "TweetCell.h"
 
-@interface UserViewController ()
+@interface UserViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UIImageView *profilePicView;
 @property (weak, nonatomic) IBOutlet UIImageView *headerView;
 @property (weak, nonatomic) IBOutlet UILabel *screenNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *bioLabel;
-
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UILabel *followingLabel;
+@property (weak, nonatomic) IBOutlet UILabel *followersLabel;
+@property (strong, nonatomic) NSArray *userTweets;
 @end
 
 @implementation UserViewController
@@ -24,6 +28,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    if([self.restorationIdentifier isEqual:@"myProfile"]) {
+        NSLog(@"User ID set to current user.");
+
+        [[APIManager shared] verifyCredsWithCompletion:^(NSDictionary *userInfo, NSError *error) {
+            self.userProf = [[User alloc] initWithDictionary:userInfo];
+        }];
+    }
     self.nameLabel.text = self.userProf.name;
     self.screenNameLabel.text = [NSString stringWithFormat:@"@%@", self.userProf.screenName];
     [self.profilePicView setImageWithURL:self.userProf.profilePicURL];
@@ -32,21 +45,21 @@
     self.profilePicView.layer.borderColor = [UIColor whiteColor].CGColor;
     [self.headerView setImageWithURL:self.userProf.headerPicURL];
     self.bioLabel.text = self.userProf.bio;
+    self.followersLabel.text = [NSString stringWithFormat:@"%i", self.userProf.followers];
+    self.followingLabel.text = [NSString stringWithFormat:@"%i", self.userProf.following];
     [[APIManager shared] getUserTweets:self.userProf completion:^(NSArray *tweets, NSError *error) {
         if (tweets) {
-            NSLog(@"😎😎😎 Successfully loaded home timeline");
-            /*for (NSDictionary *dictionary in tweets) {
-             NSString *text = dictionary[@"text"];
+            NSLog(@"Successfully got USER TWEETS");
+            for (Tweet *tweet in tweets) {
+             NSString *text = tweet.text;
              NSLog(@"%@", text);
-             }*/
+             }
             
-            self.timelineTweets = tweets;
-            
+            self.userTweets = tweets;
             [self.tableView reloadData];
-            [self.refreshControl endRefreshing];
             
         } else {
-            NSLog(@"😫😫😫 Error getting home timeline: %@", error.localizedDescription);
+            NSLog(@"😫😫😫 Error getting user timeline: %@", error.localizedDescription);
         }
     }];
     
@@ -66,5 +79,15 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+- (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
+    TweetCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TweetCell" forIndexPath:indexPath];
+    cell.tweet = self.userTweets[indexPath.row];
+    return cell;
+}
+
+- (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.userTweets.count;
+}
 
 @end

@@ -20,5 +20,6 @@
 - (void)retweet:(Tweet *)tweet completion:(void (^)(Tweet *, NSError *))completion;
 - (void)unretweet:(Tweet *)tweet completion:(void (^)(Tweet *, NSError *))completion;
 - (void)getUserTweets:(User *)user completion:(void (^)(NSArray *tweets, NSError *error))completion;
-
+- (void)verifyCredsWithCompletion:(void (^)(NSDictionary *userInfo, NSError *error))completion;
+- (void)getNumberOfTweets:(NSNumber *)numTweets completion:(void (^)(NSArray *tweets, NSError *error))completion;
 @end

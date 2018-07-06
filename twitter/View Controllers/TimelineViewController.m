@@ -16,7 +16,7 @@
 #import "UserViewController.h"
 #import "TweetViewController.h"
 
-@interface TimelineViewController () <ComposeViewControllerDelegate, UITableViewDataSource, UITableViewDelegate/*, UIScrollViewDelegate*/>
+@interface TimelineViewController () <ComposeViewControllerDelegate, UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *timelineTweets;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
@@ -137,7 +137,7 @@
     [[APIManager shared] logout];
 }
 
-/*- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     // Handle scroll behavior here
     if(!self.isMoreDataLoading){
         // Calculate the position of one screen length before the bottom of the results
@@ -147,13 +147,41 @@
         // When the user has scrolled past the threshold, start requesting
         if(scrollView.contentOffset.y > scrollOffsetThreshold && self.tableView.isDragging) {
             self.isMoreDataLoading = true;
-            [self fetchTweets];
-            [self.tableView reloadData];
-
-            // ... Code to load more results ...
+            
+            [self loadMoreData];
         }
     }
-}*/
+}
+
+-(void)loadMoreData{
+ 
+    [[APIManager shared] getNumberOfTweets:[NSNumber numberWithInteger:200] completion:^(NSArray *tweets, NSError *error) {
+        if (tweets) {
+            NSLog(@"😎😎😎 Successfully loaded MORE home timeline");
+            /*for (NSDictionary *dictionary in tweets) {
+             NSString *text = dictionary[@"text"];
+             NSLog(@"%@", text);
+             }*/
+            self.isMoreDataLoading = false;
+            
+            self.timelineTweets = tweets;
+            
+            [self.tableView reloadData];
+            [self.refreshControl endRefreshing];
+            
+        } else {
+            NSLog(@"😫😫😫 Error getting MORE home timeline: %@", error.localizedDescription);
+        }
+    }];
+
+ // Update flag
+ self.isMoreDataLoading = false;
+ 
+ 
+ // Reload the tableView now that there is new data
+ [self.tableView reloadData];
+ }
+
 
 - (void)viewWillAppear:(BOOL)animated{
     [self fetchTweets];

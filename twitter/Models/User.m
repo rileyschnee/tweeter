@@ -19,8 +19,10 @@
         self.profilePicURLString = dictionary[@"profile_image_url_https"];
         self.profilePicURL = [NSURL URLWithString:self.profilePicURLString];
         self.headerPicURL = [NSURL URLWithString:dictionary[@"profile_banner_url"]];
-        self.bio = dictionary[@"bio"];
+        self.bio = dictionary[@"description"];
         self.idStr = dictionary[@"user_id"];
+        self.followers = (int)dictionary[@"followers_count"];
+        self.following = (int)dictionary[@"friends_count"];
     }
     return self;
 }

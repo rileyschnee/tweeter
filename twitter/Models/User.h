@@ -17,6 +17,8 @@
 @property (strong, nonatomic) NSURL *headerPicURL;
 @property (strong, nonatomic) NSString *bio;
 @property (strong, nonatomic) NSString *idStr;
+@property (nonatomic) int followers;
+@property (nonatomic) int following;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 

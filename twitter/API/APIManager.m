@@ -132,17 +132,45 @@ static NSString * const consumerSecret = @"fKPAVaZvb0oixWAMDy9aZ6cR03meQC8uFJeRO
 
 - (void)getUserTweets:(User *)user completion:(void (^)(NSArray *tweets, NSError *error))completion{
 
-    NSString *urlString = [NSString stringWithFormat:@"1.1/statuses/user_timeline.json"];
-    NSDictionary *parameters = @{@"id": user.idStr};
-    [self POST:urlString parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *  _Nullable tweetDictionaries) {
+    NSString *urlString = [NSString stringWithFormat:@"1.1/statuses/user_timeline.json?screen_name=%@", user.screenName];
+//    NSLog(urlString);
+    //NSDictionary *parameters = @{@"screen_name": user.screenName};
+    [self GET:urlString
+    parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *  _Nullable tweetDictionaries) {
         // Success
         NSMutableArray *tweets  = [Tweet tweetsWithArray:tweetDictionaries];
-        completion(tweets, nil);
-        
         completion(tweets, nil);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         completion(nil, error);
     }];
 }
+
+- (void)verifyCredsWithCompletion:(void (^)(NSDictionary *userInfo, NSError *error))completion {
+    
+    NSString *urlString = [NSString stringWithFormat:@"1.1/account/verify_credentials.json"];
+    [self GET:urlString parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *  _Nullable userDictionary) {
+        // Success
+        completion(userDictionary, nil);
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        completion(nil, error);
+    }];
+}
+
+- (void)getNumberOfTweets:(NSNumber *)numTweets completion:(void (^)(NSArray *tweets, NSError *error))completion{
+    
+    NSString *urlString = @"1.1/statuses/home_timeline.json";
+    //    NSLog(urlString);
+    NSDictionary *parameters = @{@"count": numTweets};
+    [self GET:urlString
+   parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *  _Nullable tweetDictionaries) {
+       // Success
+       NSMutableArray *tweets  = [Tweet tweetsWithArray:tweetDictionaries];
+       completion(tweets, nil);
+   } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+       completion(nil, error);
+   }];
+}
+
 
 @end
