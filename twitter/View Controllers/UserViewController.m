@@ -32,14 +32,13 @@
     self.profilePicView.layer.borderColor = [UIColor whiteColor].CGColor;
     [self.headerView setImageWithURL:self.userProf.headerPicURL];
     self.bioLabel.text = self.userProf.bio;
-    [[APIManager shared] getUserTweets:(NSArray *user) withUser:(User *user) ^(NSArray *tweets, NSError *error) {
+    [[APIManager shared] getUserTweets:self.userProf completion:^(NSArray *tweets, NSError *error) {
         if (tweets) {
             NSLog(@"😎😎😎 Successfully loaded home timeline");
             /*for (NSDictionary *dictionary in tweets) {
              NSString *text = dictionary[@"text"];
              NSLog(@"%@", text);
              }*/
-            self.isMoreDataLoading = false;
             
             self.timelineTweets = tweets;
             
@@ -50,6 +49,7 @@
             NSLog(@"😫😫😫 Error getting home timeline: %@", error.localizedDescription);
         }
     }];
+    
 }
 
 - (void)didReceiveMemoryWarning {

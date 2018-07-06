@@ -130,7 +130,7 @@ static NSString * const consumerSecret = @"fKPAVaZvb0oixWAMDy9aZ6cR03meQC8uFJeRO
     }];
 }
 
-- (void)getUserTweets:(NSArray *)tweets withUser:(User *)user completion:(void (^)(NSArray *tweets, NSError *))completion{
+- (void)getUserTweets:(User *)user completion:(void (^)(NSArray *tweets, NSError *error))completion{
 
     NSString *urlString = [NSString stringWithFormat:@"1.1/statuses/user_timeline.json"];
     NSDictionary *parameters = @{@"id": user.idStr};
