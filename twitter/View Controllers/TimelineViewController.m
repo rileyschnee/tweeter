@@ -13,12 +13,15 @@
 #import "AppDelegate.h"
 #import "LoginViewController.h"
 #import "Tweet.h"
+#import "UserViewController.h"
+#import "TweetViewController.h"
 
 @interface TimelineViewController () <ComposeViewControllerDelegate, UITableViewDataSource, UITableViewDelegate/*, UIScrollViewDelegate*/>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *timelineTweets;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 @property (assign, nonatomic) BOOL isMoreDataLoading;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *composeButton;
 
 @end
 
@@ -73,13 +76,26 @@
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
     
-    UINavigationController *navigationController = [segue destinationViewController];
-    ComposeViewController *composeController = (ComposeViewController*)navigationController.topViewController;
-    composeController.delegate = self;
-    composeController.replyTo = sender;
-    if([composeController.replyTo isKindOfClass:[TweetCell class]]){
-        composeController.isAReply = true;
+    
+    if(sender == self.composeButton){
+        UINavigationController *navigationController = [segue destinationViewController];
+        ComposeViewController *composeController = (ComposeViewController*)navigationController.topViewController;
+        composeController.delegate = self;
+        composeController.replyTo = sender;
+        if([composeController.replyTo isKindOfClass:[TweetCell class]]){
+            composeController.isAReply = true;
+        }
+    } else if([sender isKindOfClass:[TweetCell class]]){
+        UITableViewCell *tappedCell = sender;
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
+        Tweet *tweet = self.timelineTweets[indexPath.row];
+    
+        TweetViewController *tweetViewController = [segue destinationViewController];
+        tweetViewController.tweet = tweet;
     }
+    
+    //UserViewController *userController = [segue destinationViewController];
+    //userController.userProf =
 }
 
 
@@ -126,6 +142,11 @@
         }
     }
 }*/
+
+- (void)viewWillAppear:(BOOL)animated{
+    [self fetchTweets];
+    [self.tableView reloadData];
+}
 
 
 

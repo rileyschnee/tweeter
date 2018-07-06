@@ -20,7 +20,7 @@
     
     [[NSNotificationCenter defaultCenter] addObserverForName:@"didLogout" object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        LoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
+        LoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"]; //Give this tab stuff after giving id
         self.window.rootViewController = loginViewController;
     }];
     

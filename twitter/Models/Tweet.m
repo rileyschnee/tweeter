@@ -44,8 +44,6 @@
         NSDate *dateAgo = [formatter dateFromString:createdAtOriginalString];
         //NSString *ago = dateAgo.shortTimeAgoSinceNow;
         self.createdAtString = dateAgo.shortTimeAgoSinceNow;
-
-
         
     }
     return self;

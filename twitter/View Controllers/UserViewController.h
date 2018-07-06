@@ -1,5 +1,5 @@
 //
-//  TweetViewController.h
+//  UserViewController.h
 //  twitter
 //
 //  Created by Riley Schnee on 7/5/18.
@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Tweet.h"
-@interface TweetViewController : UIViewController
-@property (strong, nonatomic) Tweet *tweet;
+#import "User.h"
+@interface UserViewController : UIViewController
+@property (strong, nonatomic) User *userProf;
 @end
