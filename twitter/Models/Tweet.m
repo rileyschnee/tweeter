@@ -45,6 +45,9 @@
         //NSString *ago = dateAgo.shortTimeAgoSinceNow;
         self.createdAtString = dateAgo.shortTimeAgoSinceNow;
         
+        if(dictionary[@"entities"][@"media"]) {
+            self.mediaURL = [NSURL URLWithString:dictionary[@"entities"][@"media"][0][@"media_url_https"]];
+        }
     }
     return self;
     

@@ -20,7 +20,7 @@
 @property (nonatomic) BOOL retweeted;
 @property (nonatomic) int retweetCount;
 @property (nonatomic, strong) User *retweetedByUser;
-
+@property (nonatomic, strong) NSURL *mediaURL;
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 + (NSMutableArray *)tweetsWithArray:(NSArray *)dictionaries;
 

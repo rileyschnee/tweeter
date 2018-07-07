@@ -21,6 +21,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *favoriteButton;
 @property (weak, nonatomic) IBOutlet UILabel *favoriteCountLabel;
 @property (weak, nonatomic) IBOutlet UILabel *retweetCountLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *tweetImageView;
 @end
 
 @implementation TweetViewController
@@ -39,6 +40,9 @@
     self.profilePicView.alpha = 1.0;
     if (self.tweet.user.profilePicURL != nil) {
         [self.profilePicView setImageWithURL:self.tweet.user.profilePicURL];
+    }
+    if (self.tweet.mediaURL != nil) {
+        [self.tweetImageView setImageWithURL:self.tweet.mediaURL];
     }
 }
 

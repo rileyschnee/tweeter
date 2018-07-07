@@ -357,6 +357,13 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="QxG-9J-ZTC">
+                                        <rect key="frame" x="27" y="311" width="321" height="200"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="321" id="8Cs-k0-NB3"/>
+                                            <constraint firstAttribute="height" constant="200" id="Tlp-OV-eRt"/>
+                                        </constraints>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -371,7 +378,9 @@
                                     <constraint firstItem="87N-bz-ei8" firstAttribute="top" secondItem="fIj-nx-g8f" secondAttribute="bottom" constant="32" id="iHh-3x-xPp"/>
                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="0pS-J2-Iww" secondAttribute="trailing" constant="20" id="ocI-fo-tdm"/>
                                     <constraint firstItem="bst-5R-5KX" firstAttribute="leading" secondItem="uk0-fj-3uH" secondAttribute="leading" id="omk-px-jAM"/>
+                                    <constraint firstItem="QxG-9J-ZTC" firstAttribute="top" secondItem="bst-5R-5KX" secondAttribute="bottom" constant="29" id="qPX-x5-Bvx"/>
                                     <constraint firstItem="fIj-nx-g8f" firstAttribute="leading" secondItem="uk0-fj-3uH" secondAttribute="leading" constant="27" id="u7T-Uc-HP9"/>
+                                    <constraint firstItem="QxG-9J-ZTC" firstAttribute="centerX" secondItem="uk0-fj-3uH" secondAttribute="centerX" id="uaw-Kr-WJY"/>
                                     <constraint firstItem="g0w-AU-d5R" firstAttribute="leading" secondItem="fIj-nx-g8f" secondAttribute="trailing" constant="18" id="ut5-j7-7Uk"/>
                                     <constraint firstItem="87N-bz-ei8" firstAttribute="leading" secondItem="uk0-fj-3uH" secondAttribute="leading" constant="27" id="x8R-M3-wPH"/>
                                 </constraints>
@@ -393,13 +402,14 @@
                         <outlet property="retweetButton" destination="vYE-yX-hTf" id="KID-Vl-18a"/>
                         <outlet property="retweetCountLabel" destination="y4l-li-ito" id="Vpa-a1-ZeI"/>
                         <outlet property="tweetContentLabel" destination="87N-bz-ei8" id="med-6h-fvo"/>
+                        <outlet property="tweetImageView" destination="QxG-9J-ZTC" id="Y8C-Zb-2ky"/>
                         <outlet property="userNameLabel" destination="0pS-J2-Iww" id="brM-8f-n8N"/>
                         <outlet property="userScreenNameLabel" destination="g0w-AU-d5R" id="dqV-pg-rsX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3cU-dJ-0AG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="876" y="1277"/>
+            <point key="canvasLocation" x="876" y="1276.9115442278862"/>
         </scene>
         <!--User View Controller-->
         <scene sceneID="xjo-HM-ThS">
@@ -742,7 +752,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 / 280" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZDX-Cb-dNN">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 / 140" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZDX-Cb-dNN">
                                 <rect key="frame" x="16" y="577" width="343" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="Q1g-H3-2HH"/>
